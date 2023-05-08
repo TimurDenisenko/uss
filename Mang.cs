@@ -10,7 +10,22 @@ namespace uss
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("start");
+            Console.SetWindowSize(80, 26);
+            HorLine upLine = new HorLine(0, 78, 0, '*');
+            HorLine downLine = new HorLine(0, 78, 24, '*');
+            VerLine leftLine = new VerLine(0, 24, 0, '*');
+            VerLine rightLine = new VerLine(0, 24, 78, '*');
+            upLine.Drow();
+            downLine.Drow();
+            leftLine.Drow();
+            rightLine.Drow();
+
+            Point p = new Point(4,5,'*');
+            Snake snake = new Snake(p, 4, Direction.RIGHT);
+            snake.Drow();
+            Thread.Sleep(300);
+            snake.Move();
+            Console.ReadLine();
         }
     }
 }
