@@ -23,9 +23,29 @@ namespace uss
             Point p = new Point(4,5,'*');
             Snake snake = new Snake(p, 4, Direction.RIGHT);
             snake.Drow();
-            Thread.Sleep(300);
-            snake.Move();
-            Console.ReadLine();
+
+            Food newfood = new Food(80, 25, '*');
+            Point food = newfood.CreateFood();
+            food.Draw();
+
+            while (true)
+            {
+                if (snake.Eat(food))
+                {
+                    food = newfood.CreateFood();
+                    food.Draw();
+                }
+                else
+                {
+                    snake.Move();
+                }
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    snake.Moving(key.Key);
+                }
+                Thread.Sleep(100);
+            }
         }
     }
 }

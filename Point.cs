@@ -45,11 +45,11 @@ namespace uss
             }
             else if (direction == Direction.UP)
             {
-                y+=offset;
+                y-=offset;
             }
             else
             {
-                y-=offset;
+                y+=offset;
             }
         }
 
@@ -57,6 +57,11 @@ namespace uss
         {
             sym = ' ';
             Draw();
+        }
+
+        public bool IsHit(Point p)
+        {
+            return p.x == this.x && p.y == this.y;
         }
     }
 }

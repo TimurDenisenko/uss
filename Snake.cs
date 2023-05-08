@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace uss
 {
@@ -11,7 +12,7 @@ namespace uss
         Direction direction;
         public Snake(Point tail, int length, Direction _direction)
         {
-            direction= _direction;
+            direction= _direction; 
             pList = new List<Point>(); 
             for (int i = 0; i < length; i++)
             {
@@ -38,6 +39,41 @@ namespace uss
             Point nextPoint = new Point(head);
             nextPoint.Move(1, direction);
             return nextPoint;
+        }
+
+        public void Moving(ConsoleKey key)
+        {
+            if (key == ConsoleKey.LeftArrow)
+            {
+                direction = Direction.LEFT;
+            }
+            else if (key == ConsoleKey.RightArrow)
+            {
+                direction = Direction.RIGHT;
+            }
+            else if (key == ConsoleKey.DownArrow)
+            {
+                direction = Direction.DOWN;
+            }
+            if (key == ConsoleKey.UpArrow)
+            {
+                direction = Direction.UP;
+            }
+        }
+
+        internal bool Eat(Point food)
+        {
+            Point head = GetNextPoint();
+            if (head.IsHit(food))
+            {
+                food.sym = head.sym;
+                pList.Add(food);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
